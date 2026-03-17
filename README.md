@@ -20,56 +20,67 @@ it, simply add the following line to your Podfile:
 pod 'DomainCheckSwift'
 ```
 
-  ## Swift 使用示例
+ ## 使用说明
 
-  // 1. 创建配置（必填：检查用 URL 列表、响应内容中的开始/中间/结尾标记字符串）
-  let config = DomainCheckConfig(
-      checkDomainUrls: [
-          "https://raw.githubusercontent.com/IFPLLIMIT/Kingfisher/refs/heads/master/README.md",
-          "https://pastebin.com/raw/M9Y6kLv3",
-          "https://hackmd.io/@IFPLLIMIT/HJWKWzbslx"
-      ],
-      startString: "KINGFISHERSTART",
-      middleString: "LIMITED",
-      endString: "ENDRUPEE"
-  )
-  DomainCheckManager.initialize(config: config)
+OC 和 Swift 均可以使用。使用前必须创建 `DomainCheckConfig` 并调用配置方法（Swift 用 `initialize(config:)`，OC 用 `setupWithConfig:`）。
 
-  // 2. 可选：监听网络状态
-  DomainCheckManager.share.hallNetworkCanConnect = {
-      DomainCheckManager.share.getHallCanUserDomain(success: { domain in
-          print("可用域名: \\(domain)")
-      }, failure: {
-          print("获取域名失败")
-      })
-  }
-  DomainCheckManager.share.hallNetworkUnConnect = { /* 断网回调 */ }
-  DomainCheckManager.share.startCheckNetwork()
+### Swift 使用示例
 
-  // 3. 直接获取可用域名
-  DomainCheckManager.share.getHallCanUserDomain(success: { domain in
-      // 使用 domain
-  }, failure: {
-      // 失败
-  })
+```swift
+import DomainCheckSwift
 
-  ## Objective-C 使用示例
+// 1. 创建配置（必填：检查用 URL 列表、响应内容中的开始/中间/结尾标记字符串）
+let config = DomainCheckConfig(
+    checkDomainUrls: [
+        "https://raw.githubusercontent.com/IFPLLIMIT/Kingfisher/refs/heads/master/README.md",
+        "https://pastebin.com/raw/M9Y6kLv3",
+        "https://hackmd.io/@IFPLLIMIT/HJWKWzbslx"
+    ],
+    startString: "KINGFISHERSTART",
+    middleString: "LIMITED",
+    endString: "ENDRUPEE"
+)
+DomainCheckManager.initialize(config: config)
 
-  @import DomainCheckSwift;
+// 2. 可选：监听网络状态
+DomainCheckManager.share.hallNetworkCanConnect = {
+    DomainCheckManager.share.getHallCanUserDomain(success: { domain in
+        print("可用域名: \(domain)")
+    }, failure: {
+        print("获取域名失败")
+    })
+}
+DomainCheckManager.share.hallNetworkUnConnect = { /* 断网回调 */ }
+DomainCheckManager.share.startCheckNetwork()
 
-  DomainCheckConfig *config = [[DomainCheckConfig alloc] initWithCheckDomainUrls:@[
-      @"https://raw.githubusercontent.com/IFPLLIMIT/Kingfisher/refs/heads/master/README.md",
-      @"https://pastebin.com/raw/M9Y6kLv3",
-      @"https://hackmd.io/@IFPLLIMIT/HJWKWzbslx"
-  ] startString:@"KINGFISHERSTART" middleString:@"LIMITED" endString:@"ENDRUPEE"];
-  [DomainCheckManager setupWithConfig:config];
+// 3. 直接获取可用域名
+DomainCheckManager.share.getHallCanUserDomain(success: { domain in
+    // 使用 domain
+}, failure: {
+    // 失败
+})
+```
 
-  [DomainCheckManager.share getHallCanUserDomainWithSuccess:^(NSString *domain) {
-      NSLog(@"可用域名: %@", domain);
-  } failure:^{
-      NSLog(@"获取域名失败");
-  }];
+### Objective-C 使用示例
 
+```objc
+@import DomainCheckSwift;
+
+// 1. 创建配置并初始化
+DomainCheckConfig *config = [[DomainCheckConfig alloc] initWithCheckDomainUrls:@[
+    @"https://raw.githubusercontent.com/IFPLLIMIT/Kingfisher/refs/heads/master/README.md",
+    @"https://pastebin.com/raw/M9Y6kLv3",
+    @"https://hackmd.io/@IFPLLIMIT/HJWKWzbslx"
+] startString:@"KINGFISHERSTART" middleString:@"LIMITED" endString:@"ENDRUPEE"];
+[DomainCheckManager setupWithConfig:config];
+
+// 2. 获取可用域名
+[DomainCheckManager.share getHallCanUserDomainWithSuccess:^(NSString *domain) {
+    NSLog(@"可用域名: %@", domain);
+} failure:^{
+    NSLog(@"获取域名失败");
+}];
+```
 ## Author
 
 crazyLuobo, yanwenbo_78201@163.com
