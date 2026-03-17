@@ -1,0 +1,13 @@
+use_frameworks!
+
+platform :ios, '10.0'
+
+target 'DomainCheckSwift_Example' do
+  pod 'DomainCheckSwift', :path => '../'
+
+  target 'DomainCheckSwift_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
