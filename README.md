@@ -20,6 +20,56 @@ it, simply add the following line to your Podfile:
 pod 'DomainCheckSwift'
 ```
 
+  ## Swift 使用示例
+
+  // 1. 创建配置（必填：检查用 URL 列表、响应内容中的开始/中间/结尾标记字符串）
+  let config = DomainCheckConfig(
+      checkDomainUrls: [
+          "https://raw.githubusercontent.com/IFPLLIMIT/Kingfisher/refs/heads/master/README.md",
+          "https://pastebin.com/raw/M9Y6kLv3",
+          "https://hackmd.io/@IFPLLIMIT/HJWKWzbslx"
+      ],
+      startString: "KINGFISHERSTART",
+      middleString: "LIMITED",
+      endString: "ENDRUPEE"
+  )
+  DomainCheckManager.initialize(config: config)
+
+  // 2. 可选：监听网络状态
+  DomainCheckManager.share.hallNetworkCanConnect = {
+      DomainCheckManager.share.getHallCanUserDomain(success: { domain in
+          print("可用域名: \\(domain)")
+      }, failure: {
+          print("获取域名失败")
+      })
+  }
+  DomainCheckManager.share.hallNetworkUnConnect = { /* 断网回调 */ }
+  DomainCheckManager.share.startCheckNetwork()
+
+  // 3. 直接获取可用域名
+  DomainCheckManager.share.getHallCanUserDomain(success: { domain in
+      // 使用 domain
+  }, failure: {
+      // 失败
+  })
+
+  ## Objective-C 使用示例
+
+  @import DomainCheckSwift;
+
+  DomainCheckConfig *config = [[DomainCheckConfig alloc] initWithCheckDomainUrls:@[
+      @"https://raw.githubusercontent.com/IFPLLIMIT/Kingfisher/refs/heads/master/README.md",
+      @"https://pastebin.com/raw/M9Y6kLv3",
+      @"https://hackmd.io/@IFPLLIMIT/HJWKWzbslx"
+  ] startString:@"KINGFISHERSTART" middleString:@"LIMITED" endString:@"ENDRUPEE"];
+  [DomainCheckManager setupWithConfig:config];
+
+  [DomainCheckManager.share getHallCanUserDomainWithSuccess:^(NSString *domain) {
+      NSLog(@"可用域名: %@", domain);
+  } failure:^{
+      NSLog(@"获取域名失败");
+  }];
+
 ## Author
 
 crazyLuobo, yanwenbo_78201@163.com
