@@ -72,6 +72,7 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'https://github.com/yanwenbo78201/DomainCheckSwift.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
+  s.swift_version    = '5.0'
   s.ios.deployment_target = '15.0'
 
   s.source_files = 'DomainCheckSwift/Classes/**/*'
