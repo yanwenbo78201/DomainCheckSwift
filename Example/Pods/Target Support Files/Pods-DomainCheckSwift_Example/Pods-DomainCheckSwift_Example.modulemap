@@ -1,0 +1,6 @@
+framework module Pods_DomainCheckSwift_Example {
+  umbrella header "Pods-DomainCheckSwift_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}

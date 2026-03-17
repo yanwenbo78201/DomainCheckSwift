@@ -1,0 +1,16 @@
+PODS:
+  - DomainCheckSwift (0.1.0)
+
+DEPENDENCIES:
+  - DomainCheckSwift (from `../`)
+
+EXTERNAL SOURCES:
+  DomainCheckSwift:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  DomainCheckSwift: f8afbb9222274b15fce96bf2eb397ed8d057fff7
+
+PODFILE CHECKSUM: 592ecbcb4027ca42bba82cdf837d80e5e8903b55
+
+COCOAPODS: 1.16.2

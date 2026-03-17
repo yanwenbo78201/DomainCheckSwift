@@ -1,0 +1,6 @@
+framework module DomainCheckSwift {
+  umbrella header "DomainCheckSwift-umbrella.h"
+
+  export *
+  module * { export * }
+}
