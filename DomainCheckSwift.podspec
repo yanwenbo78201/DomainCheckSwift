@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'DomainCheckSwift'
-  s.version          = '0.1.0'
+  s.version          = '0.1.1'
   s.summary          = '域名检查库：从配置的 URL 拉取内容并解析出可用域名。OC 和 Swift 均可以使用，最低 iOS 15.0。'
 
   s.description      = <<-DESC
